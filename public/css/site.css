@@ -1,0 +1,56 @@
+h1 {
+    text-shadow: 3px 2px red;
+    font : oblique bold 50px Times, serif;
+}
+
+h2 {
+	font: italic normal 35px Georgia, Serif;
+}
+
+h4{
+	font-size: 25px;
+	color: #739900;
+	line-height: 35px;
+}
+
+label{
+	font-size: 18px;
+}
+
+small{
+	font-style: italic;
+	color: #1a75ff;
+
+}
+.list-group{
+	border-bottom: 3px solid black;
+}
+
+
+table, th, td {
+border: 1px solid black;
+border-collapse : collapse;
+}
+th, td {
+padding: 15px;
+}
+
+th{
+color: white;
+}
+
+tr#auther.title {
+background-color: black;
+}
+td#auther.name{
+color: #ff3333;
+}
+	
+		
+tr#book.title {
+background-color:  #006600;
+}
+
+td#book.name{
+color: #739900;
+}		

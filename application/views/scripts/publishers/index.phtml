@@ -1,0 +1,85 @@
+		<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/js/datatables/css/jquery.dataTables.min.css'); ?>
+		<?php echo $this->partial('/index/header.phtml');?>
+		<div class ="container">
+			<div class ="row">
+				<div class = "table-responsive">
+					<table id = "publishtable" class = "table-striped table-hover">
+						<thead>
+							<tr class = "title">
+								<th> ID</th>
+								<th> Name</th>
+								<th> Address</th>
+								<th> Description</th>
+								<th></th>
+								<th></th>
+						  	</tr>
+					</thead>
+				</table>
+			<br/>
+
+	<button type = "button" id = "add">Add</button>
+				 
+<br/>
+
+<div id = "div1" class = "hidden">
+	<form action = "/Publishers/add" target = "_self" method = "POST" class = "ajax" >
+  		<fieldset>
+    		<legend>Publisher information:</legend>
+
+ 				<div class="form-group">
+ 					<label for = "name">Name:</label> 
+  					<input class="form-control" type="text" placeholder="Enter Company name" name="Name" minlength ="3" autofocus required />
+  			 	</div>
+
+ 				<div class="form-group">
+  					<label for="address">Address:</label>
+  					<input class="form-control"type="text" placeholder="Enter Company Address" name="Address" required/>
+  				</div>
+
+ 				<div class="form-group">
+  					<label for="description">Description (optional):</label>
+  					<textarea class="form-control" rows = "5" placeholder="write a description" name="Description"></textarea>
+  				</div>
+
+
+   				<input type="submit" value="Submit">
+		</fieldset>
+	</form>
+</div>
+
+<div class = "hidden" id = "div2">
+
+	<form class = "ajax2" action = "/Publishers/save" target = "_self" method = "POST" >
+  		<fieldset>
+    		<legend>Publisher information:</legend>
+
+    		<div class = "form-group">
+ 				<label for = "name">Name:</label>
+ 				<input class = "form-control formname" type="text" name="Name" minlength ="3" autofocus required />
+  			</div>
+
+  			<div class = "form-group">
+  				<label for = "address">Address:</label>
+  				<input class = "form-control formaddress" type="text" name="Address"required />
+  			</div>
+
+ 			<div class="form-group">
+  				<label for="description">Description (optional):</label>
+  				<textarea class="form-control formdescription" rows = "5" name="Description"></textarea>
+  			</div>
+
+  			<div class = "form-group">
+  				<input class = "formid" type="hidden" name="id"/>
+  				<input type="submit" value="update"/>
+			</div>
+	</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+ <?php  $this->headScript()->prependFile( $this->baseUrl("/js/validate/dist/jquery.validate.min.js")); ?>
+ <?php  $this->headScript()->prependFile( $this->baseUrl("/js/jquery.form.min.js")); ?>
+ <?php  $this->headScript()->prependFile( $this->baseUrl("/js/datatables/js/jquery.dataTables.min.js")); ?>
+ <?php  $this->headScript()->prependFile( $this->baseUrl("/js/publishers.js")); ?>

@@ -1,0 +1,90 @@
+ <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
+<?php echo $this->partial('/index/header.phtml');?>
+
+		<div class ="container">
+			<div class ="row">
+				<div class = "table-responsive">
+					<table id = "table1" class = "table table-bordered table-condensed table-responsive"  >
+					<caption> Authers list </caption>
+					<tr class = "title" id="auther">
+							<th> ID</th>
+							<th> Name</th>
+							<th> Email</th>
+							<th> actions</th>
+							<th></th>
+							<th></th>
+						</tr>
+
+				  <?php foreach ($this->auther as  $row) :?>
+							
+						<tr class = "active" id = "<?php echo $row["ID"];?>">
+							<td class = "id"> <?php echo $row["ID"] ?></td>
+							<td class ="name" id="auther"> <?php echo $row["Name"]  ?></td>
+							<td class = "email"> <?php echo $row["E_mail"]  ?></td>
+							<td> <?php if ($row["Actions"]  == null) echo ' null' ; else echo $row["Actions"]  ?></td>
+							<td>   <button class = "update" id = "<?php echo $row['ID']?>">Update </button></td>
+							<td>   <button class = "delete">delete</button></td>
+							
+							
+							
+					
+						</tr>
+
+						<?php endforeach ?>
+						
+										</table>
+					<br/>
+					<button type = "button" id = "add">Add</button>
+				 
+					<br/>
+
+<div class= "hidden" id = "div1">
+<form action = "/auther/add" target = "_self" method = "POST" class = "ajax" >
+  <fieldset>
+    <legend>Auther information:</legend>
+
+ <div class="form-group">
+ <label for = "name">Name:</label> 
+  <input class="form-control" type="text" placeholder="Enter name" name="Name" minlength= "2"autofocus required/>
+  </div>
+
+ <div class="form-group">
+  <label for="email">Email:</label>
+  <input class="form-control"type="email" placeholder="Enter email" name="E_mail" required/>
+  </div>
+   <input type="submit" value="Submit">
+	</fieldset>
+
+</form>
+</div>
+
+
+					<div class = "hidden" id = "div2">
+
+<form class = "ajax2" action = "/auther/save" target = "_self" method = "POST" >
+  <fieldset>
+    <legend>Auther information:</legend>
+
+    <div class = "form-group">
+ 	<label for = "name">Name:</label>
+ 	<input class = "form-control formname" type="text" name="Name" minlength="2" autofocus required />
+  </div>
+
+  <div class = "form-group">
+  <label for = "email">Email:</label>
+  <input class = "form-control formemail" type="email" name="E_mail"required />
+  </div>
+
+  <div class = "form-group">
+  <input class = "formid" type="hidden" name="id"/>
+  <input type="submit" value="update"/>
+	</div>
+</fieldset>
+</form>
+</div>
+			</div>
+					</div>
+				</div> 
+	
+ <?php echo $this->headScript()->prependFile( $this->baseUrl("/js/validate/dist/jquery.validate.min.js")); ?>
+ <?php echo $this->headScript()->prependFile( $this->baseUrl("/js/jquery.form.min.js")); ?>

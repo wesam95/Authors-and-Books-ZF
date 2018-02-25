@@ -1,0 +1,34 @@
+ <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
+<?php echo $this->partial('/index/header.phtml');?>
+
+		<div class = "container">
+			<h1 class = "text-center">Welcome</h1>
+			<h2 class = "text-left">Recent Books :</h2>
+		<br/><br/>
+
+		<?php
+		$authers = new Application_Model_DbTable_Authers();
+		foreach ($this->book as $row) :
+		$sql = $authers->select()
+        ->where('id ='.$row['Auther_ID'].'' ); 
+        $result= $authers->fetchAll($sql);
+        $resultRow= $result->toArray();
+        ?>
+
+		  <div class="list-group">
+		  <h4 class="list-group-item-heading"><?php echo $row['Name']; ?></h4>
+		  <small class = "text-left">Auther :</small><label class="list-group-item-text"><?= $resultRow[0]['Name'];?></label>
+		  <br/><br/>
+		</div>
+
+<?php endforeach  ?>
+
+<br/><br/>
+	
+
+			</div>
+			
+ <?php echo $this->headScript()->prependFile( $this->baseUrl("/js/validate/dist/jquery.validate.min.js")); ?>
+ <?php echo $this->headScript()->prependFile( $this->baseUrl("/js/jquery.form.min.js")); ?>
+
+

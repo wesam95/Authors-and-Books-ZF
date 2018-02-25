@@ -1,0 +1,31 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Authers Books Publishers');
+echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+ <?php echo $this->headMeta(); ?>
+ <?php echo $this->headTitle(); ?>
+
+ <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/bootstrap.min.css'); ?>
+
+
+ <?php  $this->headScript()->prependFile( $this->baseUrl("/js/site.js")); ?>
+ <?php  $this->headScript()->prependFile( $this->baseUrl("/js/bootstrap.min.js")); ?>
+ <?php  $this->headScript()->prependFile( $this->baseUrl("/js/jquery/dist/jquery.min.js")); ?>
+
+ <?php echo $this->headScript() ?>
+
+ 
+
+
+
+</head>
+<body>
+<div id="content">
+ <?php echo $this->layout()->content; ?>
+</div>
+</body>
+</html>

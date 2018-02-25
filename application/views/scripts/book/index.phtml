@@ -1,0 +1,97 @@
+		 <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
+<?php echo $this->partial('/index/header.phtml');?>
+		<div class ="container">
+			<div class ="row">
+				<div class = "table-responsive">
+					<table id = "table2" class = "table table-bordered table-condensed table-responsive">
+						<caption>Books list</caption>
+							<tr class = "title" id ="book">
+								<th> ID</th>
+								<th> Name</th>
+								<th>Auther_ID</th>
+					 			<th></th>
+								<th></th>
+							</tr>
+
+				  <?php $authers = new Application_Model_DbTable_Authers();
+				   		foreach ($this->book as $bookrow) :
+				  		$sql = $authers->select()
+        				->where('id ='.$bookrow['Auther_ID'].'' ); 
+        				$result= $authers->fetchAll($sql);
+        				$resultRow= $result->toArray();
+						?>
+							
+ 						<tr class = "active" id = "<?php echo $bookrow['ID']?>">
+							<td class = "id"> <?php echo $bookrow ['ID'] ; ?></td>
+							<td class ="name" id="book"> <?php echo $bookrow ['Name'] ; ?></td>
+							<td class = "auther" data-id= "<?= $resultRow[0]['ID']  ?>">
+							<?php echo $resultRow[0]["Name"];?> </td>
+							<td>   <button class ="updatebook">update</button></td>
+							<td>   <button class = "deletebook">delete</button></td>
+						</tr>
+					<?php endforeach ?>
+												
+					</table>
+					<br/>
+
+<button type = "button" id = "addbook">Add</button> <br/>
+
+
+<div class= "hidden" id = "addDiv">
+ <form  action = "/book/add" target = "_self" method = "POST" class = "add" >
+  <fieldset>
+    <legend>Book information:</legend>
+
+<div class="form-group">
+    <label for= "name">Name:</label>
+    <input class = "form-control" type="text" placeholder = "Book name" name="Name" minlength= "2"  autofocus required/>
+</div>
+
+<div class="form-group">
+      <label for = "auther">Auther:</label>
+	  <select class = "form-control" name = "Auther_ID"required>
+      <option value = "" disabled hidden selected>-Select Auther-</option>
+<?php foreach ($this->auther as $autherrow) :?>
+			<option value=<?= $autherrow['ID']?>><?= $autherrow ['Name'] ; ?></option>
+<?php endforeach ?>
+      </select>
+</div>
+    <input type="submit" value="Submit"/>
+	 </fieldset>
+
+  </form>
+</div>
+
+
+<div class = "hidden" id = "updateDiv">
+
+  <form class = "edit" action = "/book/save" target = "_self" method = "POST" >
+    <fieldset>
+      <legend>Book information:</legend>
+		 <div class = "form-group">
+			<label for = "name">Name:</label>
+			<input class = "form-control formname" type="text" name="Name" minlength="2" autofocus required />
+  		</div>
+
+  		<div class = "form-group">
+  			<label for = "auther">Auther:</label>
+	  		<select class = "form-control updateBook" name = "Auther_ID" >
+				<?php foreach($this->auther as $autherrow):?>
+					  <option class = "formauther" value = <?= $autherrow['ID'] ?>> <?= $autherrow ['Name'] ; ?></option>
+				<?php endforeach ?>
+			</select>
+		</div>
+
+		<div class = "form-group">				
+  			<input class = "formid" type="hidden" name="id">
+    		<input type="submit" value="update">
+		</div>
+	 </fieldset>
+
+				 		</form>
+			 		</div>
+				</div>
+			</div>
+		</div>
+ <?php echo $this->headScript()->prependFile( $this->baseUrl("/js/validate/dist/jquery.validate.min.js")); ?>
+ <?php echo $this->headScript()->prependFile( $this->baseUrl("/js/jquery.form.min.js")); ?>
