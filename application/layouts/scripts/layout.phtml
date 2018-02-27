@@ -12,9 +12,12 @@ echo $this->doctype(); ?>
  <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/bootstrap.min.css'); ?>
 
 
- <?php  $this->headScript()->prependFile( $this->baseUrl("/js/site.js")); ?>
- <?php  $this->headScript()->prependFile( $this->baseUrl("/js/bootstrap.min.js")); ?>
- <?php  $this->headScript()->prependFile( $this->baseUrl("/js/jquery/dist/jquery.min.js")); ?>
+ 	<?php  $this->headScript()->prependFile( $this->baseUrl("/js/site.js")); ?>
+  	<?php  $this->headScript()->prependFile( $this->baseUrl("/js/jquery.form.min.js")); ?>
+	<?php  $this->headScript()->prependFile( $this->baseUrl("/js/validate/dist/jquery.validate.min.js")); ?>
+	<?php  $this->headScript()->prependFile( $this->baseUrl("/js/bootstrap.min.js")); ?>
+ 	<?php  $this->headScript()->prependFile( $this->baseUrl("/js/jquery/dist/jquery.min.js")); ?>
+
 
  <?php echo $this->headScript() ?>
 
