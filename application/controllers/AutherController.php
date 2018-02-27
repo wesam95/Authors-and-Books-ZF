@@ -32,8 +32,8 @@ class AutherController extends Zend_Controller_Action
 		.'<td class ="name" id="auther">'.  $result ['Name'] .'</td>'
 		.'<td class = "email">'.  $result ['E_mail'] .'</td>'
 		.'<td>'.$actions.'</td>'
-		.'<td>   <button class = "update">Update </button></td>'
-		.'<td>   <button class = "delete">delete</button></td></tr>';
+		.'<td>   <button id = "edit" role= "button" data-toggle= "modal" data-target= "#updateForm">Update </button></td>'
+		.'<td>   <button id = "delete" role= "button" data-toggle= "modal" data-target= "#deleteForm">delete</button></td></tr>';
 		$this->_helper->json($data);
 
     }
@@ -64,10 +64,18 @@ class AutherController extends Zend_Controller_Action
         $id = $this->_getParam('id');
         $authers = new Application_Model_DbTable_Authers();
         $result = $authers->getAuther($id);
-        $result2= $authers->deleteAuther($id);
         $this->_helper->json($result);
     }
 
+    public function removeAction()
+    {
+        $id= $this->_getParam('id');
+        $authers = new Application_Model_DbTable_Authers();
+        $result= $authers->getAuther($id);
+        $result2= $authers->deleteAuther($id);
+        $this->_helper->json($result);        
+
+    }
 
 }
 

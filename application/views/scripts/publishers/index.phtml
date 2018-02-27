@@ -17,41 +17,63 @@
 				</table>
 			<br/>
 
-	<button type = "button" id = "add">Add</button>
+	<button id = "addpublisher" role= "button" data-toggle= "modal" data-target= "#publisherInsertForm">Add new publishers</button>
 				 
 <br/>
 
-<div id = "div1" class = "hidden">
-	<form action = "/Publishers/add" target = "_self" method = "POST" class = "ajax" >
-  		<fieldset>
-    		<legend>Publisher information:</legend>
+	<div class= "modal fade" id= "publisherInsertForm" role= "dialog">
+  		<div class= "modal-dialog">
+    		<div class= "modal-content">
+      			<div class= "modal-header">
+        			<button type="button" class="close" data-dismiss="modal">
+          			<span aria-hidden="true">&times;</span>
+          			<span class="sr-only">Close</span>
+        			</button>
+          			<h2 class= "modal-title" id= "myModalLable">Add Publisher</h2>
+      			</div>
+      			<div class="modal-body">
+					<form action = "/Publishers/add" target = "_self" method = "POST" name= "insertPublisher" role= "form" >
+  					<fieldset>
 
- 				<div class="form-group">
- 					<label for = "name">Name:</label> 
-  					<input class="form-control" type="text" placeholder="Enter Company name" name="Name" minlength ="3" autofocus required />
-  			 	</div>
+ 					<div class="form-group">
+ 						<label for = "name">Name:</label> 
+  						<input class="form-control" type="text" placeholder="Enter Company name" name="Name" minlength ="3" autofocus required />
+  			 		</div>
 
- 				<div class="form-group">
-  					<label for="address">Address:</label>
-  					<input class="form-control"type="text" placeholder="Enter Company Address" name="Address" required/>
-  				</div>
+ 					<div class="form-group">
+  						<label for="address">Address:</label>
+  						<input class="form-control"type="text" placeholder="Enter Company Address" name="Address" required/>
+  					</div>
 
- 				<div class="form-group">
-  					<label for="description">Description (optional):</label>
-  					<textarea class="form-control" rows = "5" placeholder="write a description" name="Description"></textarea>
-  				</div>
-
-
-   				<input type="submit" value="Submit">
-		</fieldset>
-	</form>
+ 					<div class="form-group">
+  						<label for="description">Description (optional):</label>
+  						<textarea class="form-control" rows = "5" placeholder="write a description" name="Description"></textarea>
+  					</div>
+			</fieldset>
+			</form>
+		</div>
+		<div class= "modal-footer">
+        	<button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
+        	<button type="button" class="btn btn-primary" data-dismiss="modal"id= "publisherAdd">Add</button>
+    	</div>
+   	</div>
+ </div>
 </div>
 
-<div class = "hidden" id = "div2">
 
-	<form class = "ajax2" action = "/Publishers/save" target = "_self" method = "POST" >
+<div class= "modal fade" id= "publisherUpdateForm" role= "dialog">
+  <div class= "modal-dialog">
+    <div class= "modal-content">
+      <div class= "modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h2 class= "modal-title" id= "myModalLable">Edit Publisher</h2>
+      </div>
+      <div class="modal-body">
+		<form  action = "/Publishers/save" target = "_self" method = "POST" name= "editPublisher" role= "form">
   		<fieldset>
-    		<legend>Publisher information:</legend>
 
     		<div class = "form-group">
  				<label for = "name">Name:</label>
@@ -70,11 +92,43 @@
 
   			<div class = "form-group">
   				<input class = "formid" type="hidden" name="id"/>
-  				<input type="submit" value="update"/>
 			</div>
 	</fieldset>
-							</form>
-						</div>
+	</form>
+</div>
+<div class= "modal-footer">
+  <button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary" data-dismiss="modal"id= "publisherEdit">Save changes</button>
+      	</div>
+    </div>
+  </div>
+</div>
+
+<div class= "modal fade" id= "publisherDeleteForm" role= "dialog">
+  <div class= "modal-dialog">
+    <div class= "modal-content">
+      <div class= "modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h2 class= "modal-title" id= "myModalLable">Delete Publisher</h2>
+      </div>
+      <div class="modal-body">
+        <p id= "warning"></p>
+      </div>
+      <div class= "modal-footer">
+        <form action="/publishers/remove" name="deletePublisher" method="post">
+          <input type="hidden" name="id"/>
+          <input id="publisherDelete" type="submit"class="btn btn-primary" data-dismiss="modal" name="del" value="Yes" />
+          <input type="submit" class="btn btn-default" data-dismiss="modal" name="del" value="No" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 					</div>
 				</div>
 			</div>

@@ -2,10 +2,12 @@
 <?php echo $this->partial('/index/header.phtml');?>
 
 		<div class ="container">
+			<a id = "add" role= "button" data-toggle= "modal" data-target= "#insertForm">Add new author</a>
+			<br/>
+			<br/>
 			<div class ="row">
 				<div class = "table-responsive">
 					<table id = "table1" class = "table table-bordered table-condensed table-responsive"  >
-					<caption> Authers list </caption>
 					<tr class = "title" id="auther">
 							<th> ID</th>
 							<th> Name</th>
@@ -22,67 +24,112 @@
 							<td class ="name" id="auther"> <?php echo $row["Name"]  ?></td>
 							<td class = "email"> <?php echo $row["E_mail"]  ?></td>
 							<td> <?php if ($row["Actions"]  == null) echo ' null' ; else echo $row["Actions"]  ?></td>
-							<td>   <button class = "update" id = "<?php echo $row['ID']?>">Update </button></td>
-							<td>   <button class = "delete">delete</button></td>
-							
-							
-							
-					
+							<td>   <button id = "edit" role= "button" data-toggle= "modal" data-target= "#updateForm">Update </button></td>
+							<td>   <button id = "delete" role= "button" data-toggle= "modal" data-target= "#deleteForm">delete</button></td>
 						</tr>
-
 						<?php endforeach ?>
-						
-										</table>
-					<br/>
-					<button type = "button" id = "add">Add</button>
-				 
-					<br/>
+					</table>
+				<br/>
+			
+<div class= "modal fade" id= "insertForm" role= "dialog">
+  <div class= "modal-dialog">
+    <div class= "modal-content">
+      <div class= "modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+          <h2 class= "modal-title" id= "myModalLable">Add Author</h2>
+      </div>
+      <div class="modal-body">
+		<form action = "/auther/add" target = "_self" method = "POST" name= "insert" role= "form" >
+  			<fieldset>
 
-<div class= "hidden" id = "div1">
-<form action = "/auther/add" target = "_self" method = "POST" class = "ajax" >
-  <fieldset>
-    <legend>Auther information:</legend>
+ 				<div class="form-group">
+ 					<label for = "name">Name:</label> 
+  					<input class="form-control" type="text" placeholder="Enter name" name="Name" minlength= "2"autofocus required/>
+  				</div>
 
- <div class="form-group">
- <label for = "name">Name:</label> 
-  <input class="form-control" type="text" placeholder="Enter name" name="Name" minlength= "2"autofocus required/>
-  </div>
-
- <div class="form-group">
-  <label for="email">Email:</label>
-  <input class="form-control"type="email" placeholder="Enter email" name="E_mail" required/>
-  </div>
-   <input type="submit" value="Submit">
-	</fieldset>
-
-</form>
-</div>
-
-
-					<div class = "hidden" id = "div2">
-
-<form class = "ajax2" action = "/auther/save" target = "_self" method = "POST" >
-  <fieldset>
-    <legend>Auther information:</legend>
-
-    <div class = "form-group">
- 	<label for = "name">Name:</label>
- 	<input class = "form-control formname" type="text" name="Name" minlength="2" autofocus required />
-  </div>
-
-  <div class = "form-group">
-  <label for = "email">Email:</label>
-  <input class = "form-control formemail" type="email" name="E_mail"required />
-  </div>
-
-  <div class = "form-group">
-  <input class = "formid" type="hidden" name="id"/>
-  <input type="submit" value="update"/>
+ 				<div class="form-group">
+  					<label for="email">Email:</label>
+  					<input class="form-control"type="email" placeholder="Enter email" name="E_mail" required/>
+  				</div>
+   			</fieldset>
+		</form>
 	</div>
-</fieldset>
-</form>
+	<div class= "modal-footer">
+        <button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"id= "submitbuttonAdd">Add</button>
+    </div>
+   </div>
+ </div>
 </div>
+
+
+
+<div class= "modal fade" id= "updateForm" role= "dialog">
+  <div class= "modal-dialog">
+    <div class= "modal-content">
+      <div class= "modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h2 class= "modal-title" id= "myModalLable">Edit Author</h2>
+      </div>
+      <div class="modal-body">
+		<form  action = "/auther/save" target = "_self" method = "POST" name= "edit" role= "form">
+  		<fieldset>
+    		<div class = "form-group">
+ 				<label for = "name">Name:</label>
+ 				<input class = "form-control formname" type="text" name="Name" minlength="2" autofocus required />
+  			</div>
+
+  			<div class = "form-group">
+  				<label for = "email">Email:</label>
+  				<input class = "form-control formemail" type="email" name="E_mail"required />
+  			</div>
+
+  			<div class = "form-group">
+  				<input class = "formid" type="hidden" name="id"/>
 			</div>
-					</div>
-				</div> 
+		</fieldset>
+		</form>
+	</div>
+		<div class= "modal-footer">
+        	<button type="button" class="btn btn-default"data-dismiss="modal">Close</button>
+        	<button type="button" class="btn btn-primary" data-dismiss="modal"id= "submitbuttonEdit">Save changes</button>
+      	</div>
+    </div>
+  </div>
+</div>
+
+<div class= "modal fade" id= "deleteForm" role= "dialog">
+  <div class= "modal-dialog">
+    <div class= "modal-content">
+      <div class= "modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h2 class= "modal-title" id= "myModalLable">Delete Author</h2>
+      </div>
+      <div class="modal-body">
+        <p id= "warning"></p>
+      </div>
+      <div class= "modal-footer">
+        <form action="/auther/remove" name="delete" method="post">
+          <input type="hidden" name="id"/>
+          <input id="submitbuttonDelete" type="submit"class="btn btn-primary" data-dismiss="modal" name="del" value="Yes" />
+          <input type="submit" class="btn btn-default" data-dismiss="modal" name="del" value="No" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+	</div>
+	</div>
+	</div>
+	</div> 
 	

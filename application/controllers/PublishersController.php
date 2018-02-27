@@ -36,8 +36,8 @@ class PublishersController extends Zend_Controller_Action
         .'<td class ="name">'.  $result ['Name'] .'</td>'
         .'<td class = "address">'.  $result ['Address'] .'</td>'
         .'<td class = "description">'.$result ['Description'].'</td>'
-        .'<td>   <button class = "update">Update </button></td>'
-        .'<td>   <button class = "delete">delete</button></td></tr>';
+        .'<td>   <button id = "editpublisher" role= "button" data-toggle= "modal" data-target= "#publisherUpdateForm">Update </button></td>'
+        .'<td>   <button id = "deletepublisher" role= "button" data-toggle= "modal" data-target= "#publisherDeleteForm">delete</button></td></tr>';
         $this->_helper->json($data);
 
     }
@@ -69,10 +69,18 @@ class PublishersController extends Zend_Controller_Action
         $id = $this->_getParam('id');
         $publishers = new Application_Model_DbTable_Publishers();
         $result = $publishers->getPublisher($id);
-        $result2= $publishers->deletePublisher($id);
         $this->_helper->json($result);
     }
 
+    public function removeAction()
+    {
+        $id= $this->_getParam('id');
+        $publishers = new Application_Model_DbTable_Publishers();
+        $result= $publishers->getPublisher($id);
+        $result2= $publishers->deletePublisher($id);
+        $this->_helper->json($result);        
+
+    }
 
 }
 

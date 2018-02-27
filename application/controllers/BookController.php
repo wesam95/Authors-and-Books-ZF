@@ -34,8 +34,8 @@ class BookController extends Zend_Controller_Action
         .'<td class = "id"> ' . $result ['ID'] .' </td>'
         .'<td class ="name" id="book"> ' . $result ['Name'] . '</td>'
         .'<td class = "auther" data-id= "' . $result2['ID'] . '"> ' . $result2['Name'] . '</td>'
-        .'<td>   <button class ="update">update</button></td>'
-        .'<td>   <button class = "delete">delete</button></td></tr>' ;
+        .'<td>   <button id ="updatebook" role= "button" data-toggle= "modal" data-target= "#bookUpdateForm">update</button></td>'
+        .'<td>   <button id = "deletebook" role= "button" data-toggle= "modal" data-target= "#bookDeleteForm">delete</button></td></tr>' ;
         $this->_helper->json($data);
 
     }
@@ -73,8 +73,16 @@ class BookController extends Zend_Controller_Action
         $id = $this->_getParam('id');
         $books = new Application_Model_DbTable_Books();
         $result = $books->getBook($id);
-        $result2= $books->deleteBook($id);
         $this->_helper->json($result);
+    }
+
+    public function removeAction()
+    {
+        $id= $this->_getParam('id');
+        $books = new Application_Model_DbTable_Books();
+        $result= $books->getBook($id);
+        $result2= $books->deleteBook($id);
+        $this->_helper->json($result);        
     }
     
 
