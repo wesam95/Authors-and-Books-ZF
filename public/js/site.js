@@ -1,13 +1,23 @@
 $(document).ready(function(){
-	 $("body").on('click','#add',function(){
+	 
 	 $("form[name=insert]").validate();
-	});
+
+	 $("span[aria-hidden=true]").click(function(){
+	 $("label[class=error]").remove();
+	 $("form[name=insert]").clearForm();
+	 });
+
+	 $(".btn-default").click(function(){
+	 $("label[class=error]").remove();
+	 $("form[name=insert]").clearForm();
+	 });
 
 	 $("#submitbuttonAdd").click(function(){
-     $("form[name=insert]").submit();
+	 $("form[name=insert]").submit();
 	});
 
 	$("form[name=insert]").ajaxForm(function(data){
+	$("#insertForm").modal('hide');
 	$("#table1").append(data);
 	$("form[name=insert").clearForm();
 	});
@@ -33,6 +43,7 @@ $(document).ready(function(){
     });
 
 	$("form[name=edit]").ajaxForm(function(data){
+	$("#updateForm").modal('hide');
     var row = $("#table1").find("#"+data['ID']+"");
 	row.find(".name").text(data['Name']);
     row.find(".email").text(data['E_mail']);
@@ -61,13 +72,22 @@ $(document).ready(function(){
 //book js
 
 
-			$("#addbook").click(function(){
 			$("form[name=insertBook]").validate();
-		});
+
+			$("span[aria-hidden=true]").click(function(){
+	 		$("label[class=error]").remove();
+	 		$("form[name=insertBook]").find("input[name=Name]").val("");
+	 	});
+
+			$(".btn-default").click(function(){
+	 		$("label[class=error]").remove();
+	 		$("form[name=insertBook]").find("input[name=Name]").val("");
+	 	});
 			$("#booksubmitbuttonAdd").click(function(){
      		$("form[name=insertBook]").submit();
      	});
-			$("form[name=insertBook").ajaxForm(function(data){ 
+			$("form[name=insertBook").ajaxForm(function(data){
+			$("#bookInsertForm").modal('hide'); 
 			$("#table2").append(data);
         	$("form[name=insertBook]").clearForm();
 		});
@@ -95,6 +115,7 @@ $(document).ready(function(){
     	$("form[name=editBook]").submit();
     });
 		$("form[name=editBook]").ajaxForm(function(data){
+		$("#bookUpdateForm").modal('hide');
 		var row = $("#table2").find("#"+data['ID']+"");
 		$(row).find(".name").text(data['Name']);
 		$(row).find(".auther").text(data[0]['Name']);

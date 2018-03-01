@@ -12,13 +12,23 @@
       		return '<button id = "deletepublisher" role= "button" data-toggle= "modal" data-target= "#publisherDeleteForm">delete</button>';}}
 	 		]
 	 	});
-	 		$("#addpublisher").click(function(){
-			$("form.ajax").validate();
-		});
+			$("form[name=insertPublisher]").validate();
+
+			$("span[aria-hidden=true]").click(function(){
+	 		$("label[class=error]").remove();
+	 		$("form[name=insertPublisher]").clearForm();
+	 	});
+
+			$(".btn-default").click(function(){
+	 		$("label[class=error]").remove();
+	 		$("form[name=insertPublisher]").clearForm();
+	 	});
+		
 			$("#publisherAdd").click(function(){
      		$("form[name=insertPublisher]").submit();
 		});
 			$("form[name=insertPublisher]").ajaxForm(function(){
+			$("#publisherInsertForm").modal('hide');
         	var table = $("#publishtable").DataTable();
         	table.ajax.reload(null ,false);
         	$("form[name=insertPublisher]").clearForm();
@@ -41,10 +51,12 @@
 
 	});
 				$("form[name=editPublisher]").validate();
+				
 				$("#publisherEdit").click(function(){
     			$("form[name=editPublisher]").submit();
     });
 				$("form[name=editPublisher]").ajaxForm(function(){
+				$("#publisherUpdateForm").modal('hide');
 				var table = $("#publishtable").DataTable();
  				table.ajax.reload(null , false);
  				
